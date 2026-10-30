@@ -1,7 +1,7 @@
 {
   "name": "ui-design-skills",
   "displayName": "UI design skills",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Agent skills for designing and reviewing interfaces: hierarchy, spacing, type, color, depth, images, and polish.",
   "author": {
     "name": "dennytrumpet"
