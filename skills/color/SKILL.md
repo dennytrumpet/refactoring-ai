@@ -1,6 +1,6 @@
 ---
 name: color
-description: Use when choosing a palette, building an OKLCH shade ramp, or checking contrast and status colors. Use when colors are one-off hex values, washed-out ramps, or the only signal for meaning.
+description: Use when choosing a palette, building or deriving an OKLCH shade ramp, or checking contrast and status colors. Use when colors are one-off hex values, washed-out ramps, appearance names in product CSS, or the only signal for meaning.
 ---
 
 # Color
@@ -11,7 +11,7 @@ description: Use when choosing a palette, building an OKLCH shade ramp, or check
 
 - Author UI color in OKLCH. L is perceptual lightness, so equal steps in L look evenly spaced. C is chroma, how colorful the step is. H is the hue in degrees. Hex and RGB hide those relationships, so do not build a ramp by nudging hex.
 - A five-swatch brand sheet is not a product palette. You need a gray ramp for text and surfaces, one or two primaries for actions, and accent ramps for success, warning, and danger. A complex product can need on the order of ten hues.
-- Define every shade before you use it. Do not call `lighten()`, `darken()`, or `color-mix()` at the component to invent a new step. That manufactures near-duplicates. Use the fixed 11-step scale: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950. Pick the button step and one alert pair first, then fill only the missing steps on that scale. Do not insert a 450 because two neighbors feel close.
+- Define every shade before you use it. Do not call `lighten()` or `darken()` at the component to invent a new step. That manufactures near-duplicates. Derive the 11 steps once. See Deriving colors. Use the fixed scale 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950. Do not insert a 450 because two neighbors feel close. `color-mix(in oklch, ...)` is for a tint, a hover, an active state, or an alpha overlay, not for a new ramp stop.
 - Lightness is L. Lighten and darken by changing L, not by rotating hue. Hold H nearly constant on a ramp. A small deliberate drift is enough (the reference blue moves from about 255 toward 268 as it gets darker). A jump that reads as a different color belongs on another ramp.
 - Keep chroma up for as long as the gamut allows, so the light and dark steps do not collapse to gray. C peaks through the middle, where displays can actually show it. Very high L and very low L cannot hold that chroma in sRGB, so lower C on 50, 100, 900, and 950 instead of letting the browser clip the color into a muddy neighbor. The reference blue peaks near 0.25 at 600, and is about 0.01 at 50 and 0.09 at 950.
 - Grays are not zero chroma. Give them a little C at a cool hue, around 250–265 in the reference, with C staying under about 0.04. The darkest ink is gray-950, not pure black.
@@ -98,9 +98,44 @@ Button fill: `--color-blue-600`. Alert background: `--color-red-50`. Alert text:
 }
 ```
 
+## Deriving colors
+
+Name product colors by role, not by appearance. Use `primary`, `secondary`, `accent`, `core` for the neutral surface, `tone` for dark neutral text, and `info`, `success`, `warning`, and `critical`. Do not name a product token `blue-500`. A theme swap then changes the base color and leaves every call site alone. The hue names in Defaults are the reference sheet. Product CSS should use these roles. The step numbers are the same 50 to 950 stops.
+
+The reusable ramp is [references/derived-colors.css](references/derived-colors.css). One base color fills a whole ramp with relative color syntax.
+
+```css
+--color-primary-500: oklch(from var(--color-primary) var(--l-500) var(--c-500) h);
+```
+
+`oklch(from ...)` keeps the origin hue in `h`, and replaces lightness and chroma with the step. Repeat that line for `secondary`, `accent`, `core`, `tone`, `info`, `success`, `warning`, and `critical`. The file shows step 600 for each. The other ten stops are the same substitution.
+
+Chroma follows `c * sin((1 - L) * pi) + --c-base`. It peaks at mid lightness and tapers toward white and black, so the ends stay in gamut and the tints do not look washed out. `--c-base` is the minimum chroma to tolerate, so the extremes keep a hint of hue. The `--l-*` numbers are a starting set. Tune them. Keep the chroma math.
+
+`--c-500` stores the token `c`. It does not resolve on its own. Custom properties are substituted as tokens where they are used, inside `oklch(from ...)`. Only then does `c` mean that origin color's chroma. The same `--c-500` is valid for every role. It is invalid as a standalone color or length.
+
+`color-mix(in oklch, ...)` is for the states around a step, not for a new stop.
+
+```css
+.tint { background: color-mix(in oklch, var(--color-primary) 15%, var(--color-core)); }
+.button:hover { background: color-mix(in oklch, var(--color-primary-600) 85%, var(--color-tone)); }
+.button:active { background: color-mix(in oklch, var(--color-primary-600) 70%, var(--color-tone)); }
+.overlay { background: color-mix(in oklch, var(--color-tone) 45%, transparent); }
+```
+
+Relative color syntax and `sin()` work in current Chrome, Safari, and Firefox. For older browsers, ship a static ramp of plain `oklch()` steps, or gate the derived tokens.
+
+```css
+.button { background: var(--color-primary); }
+@supports (color: oklch(from white l c h)) {
+  .button { background: var(--color-primary-600); }
+}
+```
+
 ## Checklist
 
-- [ ] New colors are the named 11-step tokens, not a fresh hex and not a runtime mix or lighten.
+- [ ] New ramp stops are the named 11-step tokens, not a fresh hex and not a `lighten()` at the call site. Tint, hover, active, and overlay may use `color-mix(in oklch, ...)`.
+- [ ] Product tokens use role names. Appearance names such as `blue-500` stay on the reference sheet.
 - [ ] Each ramp is OKLCH. L is what changes from 50 to 950, and the steps look even in lightness.
 - [ ] C stays high through the middle and drops at the light and dark ends only as far as the gamut requires.
 - [ ] H on one ramp drifts a little. It does not jump to a different color.
