@@ -12,8 +12,9 @@ The advice is original writing. It is not a reproduction of *Refactoring UI*, an
 | `hierarchy` | Ranking what stands out: emphasis, labels, headings, and actions. |
 | `layout-spacing` | Widths, columns, padding, and gaps. |
 | `typography` | Fonts, sizes, measure, line height, alignment, and links. |
+| `color` | OKLCH palettes, the 11-step shade scale, contrast, and status that is not color-only. |
 
-Later skills in this plugin cover color, depth, images, finishing touches, and a full-screen review. Start with `design-mode` so the agent does not jump straight to decoration.
+Later skills in this plugin cover depth, images, finishing touches, and a full-screen review. Start with `design-mode` so the agent does not jump straight to decoration.
 
 ## Layout
 
