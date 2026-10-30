@@ -77,5 +77,5 @@ After: scale steps, a reading measure, baseline alignment, tighter display leadi
   text-align: left;
 }
 .title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-.price { font-size: 14px; font-variant-numeric: tabular-nums; color: hsl(215 16% 40%); }
+.price { font-size: 14px; font-variant-numeric: tabular-nums; color: var(--color-gray-600); }
 ```

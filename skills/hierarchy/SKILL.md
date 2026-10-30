@@ -21,7 +21,7 @@ description: Use when deciding what should stand out on a screen or component, o
 
 ## Defaults
 
-- Ink on an off-white surface: primary `hsl(222 47% 11%)`, secondary `hsl(215 16% 40%)`, tertiary `hsl(215 14% 62%)`.
+- Ink on an off-white surface: primary `var(--color-gray-900)`, secondary `var(--color-gray-600)`, tertiary `var(--color-gray-400)`.
 - Weights: 400 or 500 for body, 600 or 700 for emphasis. Never 300 for text under 20px.
 - On a saturated fill, secondary text keeps the fill's hue. Move lightness about 15–25 points toward the background and keep saturation high enough that it is not gray.
 - One solid high-contrast button per view. A second solid button means the first one is no longer primary.
