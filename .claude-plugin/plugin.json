@@ -4,8 +4,10 @@
   "version": "1.1.0",
   "description": "Agent skills for designing and reviewing interfaces: hierarchy, spacing, type, color, depth, images, and polish.",
   "author": {
-    "name": "dennytrumpet"
+    "name": "dennytrumpet",
+    "url": "https://github.com/dennytrumpet"
   },
+  "homepage": "https://github.com/dennytrumpet/refactoring-ai",
   "repository": "https://github.com/dennytrumpet/refactoring-ai",
   "license": "MIT",
   "keywords": [
@@ -15,6 +17,5 @@
     "typography",
     "color",
     "layout"
-  ],
-  "skills": "./skills/"
+  ]
 }
