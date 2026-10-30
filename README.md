@@ -10,8 +10,9 @@ The advice is original writing. It is not a reproduction of *Refactoring UI*, an
 | --- | --- |
 | `design-mode` | Starting or scoping a UI change. Loads the topic skills as the decisions come up. |
 | `hierarchy` | Ranking what stands out: emphasis, labels, headings, and actions. |
+| `layout-spacing` | Widths, columns, padding, and gaps. |
 
-Later skills in this plugin cover layout and spacing, typography, color, depth, images, finishing touches, and a full-screen review. Start with `design-mode` so the agent does not jump straight to decoration.
+Later skills in this plugin cover typography, color, depth, images, finishing touches, and a full-screen review. Start with `design-mode` so the agent does not jump straight to decoration.
 
 ## Layout
 
