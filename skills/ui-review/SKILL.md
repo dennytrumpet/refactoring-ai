@@ -47,7 +47,7 @@ Evidence: <files, screenshot, viewport>
 - **layout-spacing** — Label and field share the same 16px gap as the next group. Use 8px inside the field and 24px between groups.
 
 ## P2
-- **finishing-touches** — The panel is separated only by a 1px border. Drop the border and use `--gray-100` against the white page.
+- **finishing-touches** — The panel is separated only by a 1px border. Drop the border and use `--color-gray-100` against the white page.
 
 ## Clear
 - typography: sizes are on the scale, measure is capped at 65ch.
@@ -80,7 +80,7 @@ Evidence: snippet above, desktop width assumed
 
 ## P0
 - **hierarchy** — "Send" and "Void" are both solid, and void is red on the parent screen. Keep "Send" solid. Make "Void" a text button until a confirm dialog, where it becomes the primary destructive action.
-- **color** — "overdue" is color-less gray text and the only status signal. State it in words (already done) and add an icon or a dark-on-tint alert from the danger ramp. Do not rely on red alone.
+- **color** — "overdue" is the only status signal, and the fills are one-off hex. Use the OKLCH danger ramp: `--color-red-50` behind `--color-red-800` text, keep the words, and do not rely on red alone. The primary button should be a ramp step such as `--color-gray-900`, not a new hex.
 
 ## P1
 - **hierarchy** — The title is 42px and gray, so the heading level is doing the styling. Drop it to 20px or 24px, near-black, weight 600. The title is a label. The status and amount should lead.
@@ -97,13 +97,13 @@ Evidence: snippet above, desktop width assumed
 After the P0 and P1 fixes:
 
 ```html
-<article style="max-width: 512px; padding: 24px; background: hsl(210 40% 98%); border-radius: 6px; font-family: system-ui, sans-serif">
-  <p style="margin: 0; font-size: 14px; color: hsl(215 16% 34%)">Invoice 1842</p>
-  <h1 style="margin: 4px 0 0; font-size: 24px; line-height: 1.25; font-weight: 600; color: hsl(222 47% 11%)">$2,400 overdue</h1>
-  <p style="margin: 8px 0 0; font-size: 14px; color: hsl(0 63% 28%); background: hsl(0 86% 97%); display: inline-block; padding: 4px 8px">Payment is 12 days late</p>
+<article style="max-width: 512px; padding: 24px; background: oklch(96.7% 0.003 264.542); border-radius: 6px; font-family: system-ui, sans-serif">
+  <p style="margin: 0; font-size: 14px; color: oklch(44.6% 0.03 256.802)">Invoice 1842</p>
+  <h1 style="margin: 4px 0 0; font-size: 24px; line-height: 1.25; font-weight: 600; color: oklch(21% 0.034 264.665)">$2,400 overdue</h1>
+  <p style="margin: 8px 0 0; font-size: 14px; color: oklch(44.4% 0.177 26.899); background: oklch(97.1% 0.013 17.38); display: inline-block; padding: 4px 8px">Payment is 12 days late</p>
   <div style="margin-top: 24px; display: flex; gap: 16px; align-items: center">
-    <button style="background: hsl(222 47% 11%); color: white; border: 0; border-radius: 6px; padding: 8px 12px">Send reminder</button>
-    <button style="background: none; border: 0; color: hsl(215 16% 34%); text-decoration: underline">Void</button>
+    <button style="background: oklch(21% 0.034 264.665); color: white; border: 0; border-radius: 6px; padding: 8px 12px">Send reminder</button>
+    <button style="background: none; border: 0; color: oklch(44.6% 0.03 256.802); text-decoration: underline">Void</button>
   </div>
 </article>
 ```
