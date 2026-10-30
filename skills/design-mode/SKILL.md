@@ -12,7 +12,7 @@ description: Use when starting a screen, feature, or visual redesign, before pic
 - Design the next feature, not the application shell. Navigation, page width, and logo placement fall out of real screens. A share-file task needs a recipient, a note, an expiry, and a send action long before it needs a sidebar.
 - Stay low-fidelity until the structure works. Ignore typefaces, shadows, and icons at the start. If the tool keeps pulling you into detail, sketch with a fat marker or block boxes in grayscale. Color comes after spacing, size, and contrast already explain the screen.
 - Treat mockups as disposable. Ship a working slice instead of specifying every edge case up front. Design the smallest useful version, build it, then design the next feature. Drop anything you are not ready to implement. A notes field without attachments is shippable; a paperclip that implies attachments you will not build blocks the whole feature.
-- Pick a personality on purpose and keep it. The concrete levers are type genre, color temperature, corner radius, and voice. A serious tool can use a neutral or serif face, near-zero radius, and plain language. A playful tool can use a rounded face, large radius, and casual labels. Do not mix sharp and very round corners in one product. Look at products your users already trust, and do not clone a direct competitor.
+- Pick a personality on purpose and keep it. The concrete levers are type genre, color temperature, corner radius, and voice. A serious tool can use a neutral or serif face, near-zero radius, and plain language. A playful tool can use a rounded face, large radius, and casual labels. Do not mix sharp and very round corners in one product. Look at products your users already trust, and do not clone a direct competitor. When you name a family, paste the matching `font-family` from `typography` after it.
 - Decide from a short list. Predefine type size, weight, line height, color, space, size, radius, border width, shadow, and opacity. When choosing, try the scale step you guess and its two neighbors. Two of the three are usually wrong. Add a new system the second time you hesitate over the same kind of value. Do not invent a one-off pixel.
 
 ## Defaults
@@ -21,9 +21,9 @@ Pick one personality and only its tokens:
 
 | Personality | Type | Radius | Hue feel | Voice |
 | --- | --- | --- | --- | --- |
-| Plain product | Neutral system sans | 6px | Familiar blue or teal | Direct, no jokes |
-| Formal | Serif for titles, neutral sans for UI | 0 | Ink, stone, a restrained gold or green | Complete sentences |
-| Playful | Rounded sans | 16px | A clear non-corporate hue | Short, friendly |
+| Plain product | System UI | 6px | Familiar blue or teal | Direct, no jokes |
+| Formal | Transitional for titles, System UI for UI | 0 | Ink, stone, a restrained gold or green | Complete sentences |
+| Playful | Rounded Sans | 16px | A clear non-corporate hue | Short, friendly |
 
 Shared constraints until a topic skill replaces them:
 

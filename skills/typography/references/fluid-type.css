@@ -1,0 +1,40 @@
+:root {
+  --minor-second: 1.067;
+  --major-second: 1.125;
+  --minor-third: 1.2;
+  --major-third: 1.25;
+  --perfect-fourth: 1.333;
+  --aug-fourth: 1.414;
+  --perfect-fifth: 1.5;
+  --golden-ratio: 1.618;
+  --text-ratio: var(--minor-third);
+  --text-min: 16;
+  --text-max: calc(var(--text-min) * var(--text-ratio));
+  --screen-min: 640;
+  --screen-max: 1536;
+  --text-diff: calc(var(--text-max) - var(--text-min));
+  --screen-diff: calc(var(--screen-max) - var(--screen-min));
+  --fluid-size: calc(var(--text-min) * 1px + (100cqw - var(--screen-min) * 1px) * var(--text-diff) / var(--screen-diff));
+  --text-base: clamp(var(--text-min) * 1px, var(--fluid-size), var(--text-max) * 1px);
+  --text-lg: calc(var(--text-base) * var(--text-ratio));
+  --text-xl: calc(var(--text-lg) * var(--text-ratio));
+  --text-2xl: calc(var(--text-xl) * var(--text-ratio));
+  --text-3xl: calc(var(--text-2xl) * var(--text-ratio));
+  --text-4xl: calc(var(--text-3xl) * var(--text-ratio));
+  --text-5xl: calc(var(--text-4xl) * var(--text-ratio));
+  --text-6xl: calc(var(--text-5xl) * var(--text-ratio));
+  --text-7xl: calc(var(--text-6xl) * var(--text-ratio));
+  --text-8xl: calc(var(--text-7xl) * var(--text-ratio));
+  --text-9xl: calc(var(--text-8xl) * var(--text-ratio));
+  --text-sm: calc(var(--text-base) / var(--text-ratio));
+  --text-xs: calc(var(--text-sm) / var(--text-ratio));
+}
+
+.prose {
+  container-type: inline-size;
+}
+
+.prose h1 {
+  font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+  font-size: var(--text-4xl);
+}

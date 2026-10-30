@@ -1,0 +1,58 @@
+:root {
+  --c-base: 0.014;
+
+  --color-primary: oklch(45% 0.24 277.023);
+  --color-secondary: oklch(65% 0.241 354.308);
+  --color-accent: oklch(77% 0.152 181.912);
+  --color-core: oklch(92% 0.004 286.32);
+  --color-tone: oklch(21.15% 0.012 254.09);
+  --color-info: oklch(74% 0.16 232.661);
+  --color-success: oklch(76% 0.177 163.223);
+  --color-warning: oklch(82% 0.189 84.429);
+  --color-critical: oklch(71% 0.194 13.428);
+
+  --l-50: 0.985;
+  --l-100: 0.97;
+  --l-200: 0.922;
+  --l-300: 0.87;
+  --l-400: 0.708;
+  --l-500: 0.556;
+  --l-600: 0.439;
+  --l-700: 0.371;
+  --l-800: 0.269;
+  --l-900: 0.205;
+  --l-950: 0.145;
+
+  --c-50: calc(c * (sin((1 - var(--l-50)) * pi)) + var(--c-base));
+  --c-100: calc(c * (sin((1 - var(--l-100)) * pi)) + var(--c-base));
+  --c-200: calc(c * (sin((1 - var(--l-200)) * pi)) + var(--c-base));
+  --c-300: calc(c * (sin((1 - var(--l-300)) * pi)) + var(--c-base));
+  --c-400: calc(c * (sin((1 - var(--l-400)) * pi)) + var(--c-base));
+  --c-500: calc(c * (sin((1 - var(--l-500)) * pi)) + var(--c-base));
+  --c-600: calc(c * (sin((1 - var(--l-600)) * pi)) + var(--c-base));
+  --c-700: calc(c * (sin((1 - var(--l-700)) * pi)) + var(--c-base));
+  --c-800: calc(c * (sin((1 - var(--l-800)) * pi)) + var(--c-base));
+  --c-900: calc(c * (sin((1 - var(--l-900)) * pi)) + var(--c-base));
+  --c-950: calc(c * (sin((1 - var(--l-950)) * pi)) + var(--c-base));
+
+  --color-primary-50: oklch(from var(--color-primary) var(--l-50) var(--c-50) h);
+  --color-primary-100: oklch(from var(--color-primary) var(--l-100) var(--c-100) h);
+  --color-primary-200: oklch(from var(--color-primary) var(--l-200) var(--c-200) h);
+  --color-primary-300: oklch(from var(--color-primary) var(--l-300) var(--c-300) h);
+  --color-primary-400: oklch(from var(--color-primary) var(--l-400) var(--c-400) h);
+  --color-primary-500: oklch(from var(--color-primary) var(--l-500) var(--c-500) h);
+  --color-primary-600: oklch(from var(--color-primary) var(--l-600) var(--c-600) h);
+  --color-primary-700: oklch(from var(--color-primary) var(--l-700) var(--c-700) h);
+  --color-primary-800: oklch(from var(--color-primary) var(--l-800) var(--c-800) h);
+  --color-primary-900: oklch(from var(--color-primary) var(--l-900) var(--c-900) h);
+  --color-primary-950: oklch(from var(--color-primary) var(--l-950) var(--c-950) h);
+
+  --color-secondary-600: oklch(from var(--color-secondary) var(--l-600) var(--c-600) h);
+  --color-accent-600: oklch(from var(--color-accent) var(--l-600) var(--c-600) h);
+  --color-core-600: oklch(from var(--color-core) var(--l-600) var(--c-600) h);
+  --color-tone-600: oklch(from var(--color-tone) var(--l-600) var(--c-600) h);
+  --color-info-600: oklch(from var(--color-info) var(--l-600) var(--c-600) h);
+  --color-success-600: oklch(from var(--color-success) var(--l-600) var(--c-600) h);
+  --color-warning-600: oklch(from var(--color-warning) var(--l-600) var(--c-600) h);
+  --color-critical-600: oklch(from var(--color-critical) var(--l-600) var(--c-600) h);
+}
