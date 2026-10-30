@@ -1,0 +1,21 @@
+{
+  "name": "refactoring-ai",
+  "description": "Interface design skills for coding agents.",
+  "owner": {
+    "name": "dennytrumpet",
+    "url": "https://github.com/dennytrumpet"
+  },
+  "plugins": [
+    {
+      "name": "ui-design-skills",
+      "source": "./",
+      "description": "Agent skills for designing and reviewing interfaces: hierarchy, spacing, type, color, depth, images, and polish.",
+      "author": {
+        "name": "dennytrumpet",
+        "url": "https://github.com/dennytrumpet"
+      },
+      "homepage": "https://github.com/dennytrumpet/refactoring-ai",
+      "license": "MIT"
+    }
+  ]
+}

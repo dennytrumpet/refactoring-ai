@@ -2,7 +2,7 @@
 
 Agent-agnostic skills for designing and reviewing interfaces. Any coding agent that reads [Agent Skills](https://agentskills.io) can load them: Cursor, Claude Code, and others that point at a `skills/` directory.
 
-The advice is original writing. It is not a reproduction of *Refactoring UI*, and this plugin is not affiliated with that book. See [NOTICE](NOTICE).
+Inspired by Refactoring UI by Adam Wathan and Steve Schoger. This plugin is an unofficial paraphrase, not a copy of that book, and it is not affiliated with its authors. See [NOTICE](NOTICE).
 
 ## Skills
 
@@ -23,13 +23,14 @@ Start with `design-mode` on a new feature. Use `ui-review` before calling a scre
 ## Layout
 
 ```text
-.cursor-plugin/plugin.json   Cursor plugin manifest
-.claude-plugin/plugin.json   Claude Code plugin manifest
-skills/<name>/SKILL.md       shared skills, one folder each
-scripts/validate-skills.py   frontmatter check
+.cursor-plugin/plugin.json      Cursor plugin manifest
+.claude-plugin/plugin.json      Claude Code plugin manifest
+.claude-plugin/marketplace.json Claude Code marketplace catalog
+skills/<name>/SKILL.md          shared skills, one folder each
+scripts/validate-skills.py      frontmatter check
 ```
 
-Both manifests set `skills` to `./skills/`. There is one copy of each skill.
+The Cursor manifest points `skills` at `./skills/`. Claude Code scans that directory by default, so its manifest does not set `skills` again. There is one copy of each skill.
 
 ## Install
 
@@ -54,10 +55,11 @@ claude --plugin-dir /path/to/refactoring-ai
 
 To keep it across sessions, copy the repo to `~/.claude/skills/ui-design-skills` (the folder that contains `.claude-plugin/plugin.json`) or the project's `.claude/skills/ui-design-skills`. Claude Code treats that as a skills-directory plugin.
 
-From a marketplace you already added:
+Install from GitHub:
 
 ```text
-/plugin install ui-design-skills@<marketplace>
+/plugin marketplace add dennytrumpet/refactoring-ai
+/plugin install ui-design-skills@refactoring-ai
 ```
 
 ### Other agents
@@ -77,3 +79,7 @@ python3 scripts/validate-skills.py
 ```
 
 The script fails if a skill is missing frontmatter, if `name` does not match the folder, or if `description` is empty.
+
+## License
+
+The skill text, manifests, and scripts are under the MIT License. See [LICENSE](LICENSE). The book credit and the limit on what this repo may contain are in [NOTICE](NOTICE).
