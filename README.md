@@ -14,8 +14,9 @@ The advice is original writing. It is not a reproduction of *Refactoring UI*, an
 | `typography` | Fonts, sizes, measure, line height, alignment, and links. |
 | `color` | OKLCH palettes, the 11-step shade scale, contrast, and status that is not color-only. |
 | `depth` | Elevation, shadows, inset surfaces, and overlapping layers. |
+| `images` | Photos, icons, screenshots, and user uploads. |
 
-Later skills in this plugin cover images, finishing touches, and a full-screen review. Start with `design-mode` so the agent does not jump straight to decoration.
+Later skills in this plugin cover finishing touches and a full-screen review. Start with `design-mode` so the agent does not jump straight to decoration.
 
 ## Layout
 
