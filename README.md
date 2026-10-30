@@ -16,8 +16,9 @@ The advice is original writing. It is not a reproduction of *Refactoring UI*, an
 | `depth` | Elevation, shadows, inset surfaces, and overlapping layers. |
 | `images` | Photos, icons, screenshots, and user uploads. |
 | `finishing-touches` | Empty states, accents, backgrounds, and fewer borders. |
+| `ui-review` | Audit a screen or component against the other checklists and return prioritized fixes. |
 
-The last skill, `ui-review`, audits a screen against the checklists above. Start with `design-mode` so the agent does not jump straight to decoration.
+Start with `design-mode` on a new feature. Use `ui-review` before calling a screen done.
 
 ## Layout
 
