@@ -1,109 +1,85 @@
 ---
 name: ui-review
-description: Use when auditing a screen, component, diff, or screenshot before shipping or after a visual change. Runs every other skill checklist and returns prioritized fixes.
+description: Review visual hierarchy, layout, type, color, depth, images, and polish using observed evidence. Report prioritized visual findings and identify functional accessibility checks that remain separate.
 ---
 
 # UI review
 
-**Trigger:** Load to audit a finished or in-progress interface. Do not load it to invent a new feature. For that, start at `design-mode`.
+**Trigger:** Load to review a finished or in-progress interface. Start with [design-mode](../design-mode/SKILL.md) when inventing a new feature.
+
+## Principles
+
+- **Respect product conventions.** Follow the user's requirements and the project's design system first. Use this suite's defaults where a choice is open. A different type scale, palette, radius, or spacing value is not a defect by itself.
+- **Evidence before conclusions.** Report what you observed and how it affects a user. Check the rendered result when available. A percentage width does not prove stretching, a heading tag does not explain its visual size, and a written status already communicates beyond hue.
+- **Severity follows user impact.** Prioritize blocked tasks, unreadable information, and misleading controls over visual preference. Do not turn a polish suggestion into a release blocker.
+- **Separate visual and functional evidence.** This is a visual review. A screenshot cannot prove keyboard operation, accessible names, announcements, or error recovery. Report those checks separately before calling an interface ready.
 
 ## How to review
 
-1. Read the code and, when one is available, the screenshot. Note the viewport width you are judging.
-2. Open each skill and apply its checklist to what you can actually see. Skills, in order:
-   - `hierarchy`
-   - `layout-spacing`
-   - `typography`
-   - `color`
-   - `depth`
-   - `images`
-   - `finishing-touches`
-   - `design-mode`, only when the change is a new feature or a restyle
-3. Use that skill's defaults as the fix, not a new one-off value.
-4. Skip items you cannot verify. Say so. Do not guess a contrast ratio you did not compute, and do not claim a photo is low quality without seeing it.
-5. Report findings first, highest priority first. Cap the list at every P0 plus the strongest P1 and P2 items, about eight findings unless the screen is large.
+1. Identify the component or route, the requested scope, and the project's tokens and patterns. Read the code. Inspect the rendered interface when available and record the viewport.
+2. Open the relevant topic skills and apply their checklists. For a whole-screen review, consider each topic. Skip topics the change does not affect, and explain any missing evidence.
+   - [hierarchy](../hierarchy/SKILL.md)
+   - [layout-spacing](../layout-spacing/SKILL.md)
+   - [typography](../typography/SKILL.md)
+   - [color](../color/SKILL.md)
+   - [depth](../depth/SKILL.md)
+   - [images](../images/SKILL.md)
+   - [finishing-touches](../finishing-touches/SKILL.md)
+   - [design-mode](../design-mode/SKILL.md), for a new feature or restyle
+3. For each finding, state the observation, its user consequence, and the smallest fix that fits the product. Distinguish a demonstrated failure from a suggestion.
+4. Calculate contrast before reporting a ratio. Inspect images before judging their quality. If the viewport, container, image, or runtime state is unknown, report that limit instead of inventing a failure.
+5. Report findings in priority order. Keep the strongest actionable findings, usually no more than eight. If nothing fails, say so and list what you checked.
 
 ## Priority
 
 | Level | File it when |
 | --- | --- |
-| P0 | The primary action is unclear, body text is under 4.5:1 (or large text under 3:1), status is color-only, text on a photo fails in places, uploads can break the frame, or a first-run empty state has no next step. |
-| P1 | Hierarchy is tied, spacing or type leaves the scale, groups are ambiguous, the layout stretches to fill a wide viewport, or gray text sits on a saturated fill. |
-| P2 | Elevation is arbitrary, images are the wrong native size but still readable, borders are noisy, or polish and empty-state craft are thin. |
+| P0 | The reviewed interface blocks the main task for affected users or makes essential information unreadable, and the evidence establishes that impact. |
+| P1 | A demonstrated accessibility, readability, hierarchy, grouping, or responsive-layout problem harms use but does not meet P0. Text contrast below the applicable minimum is at least P1. |
+| P2 | A supported consistency or polish issue adds friction. A style preference without a user consequence is an optional suggestion, not a defect. |
+
+State why a finding has its priority. Do not assign priority from a token mismatch alone.
+
+## Readiness beyond this review
+
+Before calling the interface ready, use the project's functional accessibility checks or drive it directly to verify the following items. Record anything not checked.
+
+- Keyboard access, logical focus order, visible focus, and focus return after dialogs close.
+- Accessible names, input labels, image alternatives, and appropriate announcements for status changes.
+- Loading, validation errors, failure recovery, and empty states, including active filters with no matches.
+- Narrow viewports, 200% zoom, long translated labels, right-to-left content when supported, and missing or unusually long data.
+- Supported themes and forced colors where the product requires them.
+
+Passing the visual checks does not establish these behaviors or WCAG conformance.
 
 ## Output
 
-Use this shape. Every finding names the skill and a concrete fix.
+Report the target and evidence, then findings in priority order. Each finding names the topic, observation, user consequence, and concrete fix. Separate optional suggestions and checks that lack evidence.
 
-```markdown
-## UI review
-Target: <component or route>
-Evidence: <files, screenshot, viewport>
-
-## P0
-- **hierarchy** — Two solid buttons compete. Make "Publish" the only solid button. Render "Discard" as text until the confirm step.
-
-## P1
-- **layout-spacing** — Label and field share the same 16px gap as the next group. Use 8px inside the field and 24px between groups.
-
-## P2
-- **finishing-touches** — The panel is separated only by a 1px border. Drop the border and use `--color-gray-100` against the white page.
-
-## Clear
-- typography: sizes are on the scale, measure is capped at 65ch.
-
-## Not checked
-- images: no photos or uploads in this diff.
-```
-
-If nothing fails, say so and list what you checked. Do not invent polish work to fill the page.
+Finish with the principles from the skills you read that changed a material recommendation. Use `skill / Principle name` and state the choice it changed. Omit principles that did not affect the review.
 
 ## Example
 
-Before, a card an agent might be asked to review:
+The project uses 13px metadata, 10px compact spacing, and 8px panel radii. An invoice card sits in a 480px parent at a 1280px viewport. Its status is written as text.
 
 ```html
-<div style="border: 1px solid #ccc; padding: 10px; width: 100%">
-  <h1 style="font-size: 42px; color: #9ca3af">Invoice</h1>
-  <p style="font-size: 13px">Status: overdue</p>
-  <button style="background: #2563eb; color: #fff">Send</button>
-  <button style="background: #dc2626; color: #fff">Void</button>
-</div>
-```
-
-Review:
-
-```markdown
-## UI review
-Target: invoice card
-Evidence: snippet above, desktop width assumed
-
-## P0
-- **hierarchy** — "Send" and "Void" are both solid, and void is red on the parent screen. Keep "Send" solid. Make "Void" a text button until a confirm dialog, where it becomes the primary destructive action.
-- **color** — "overdue" is the only status signal, and the fills are one-off hex. Use the OKLCH danger ramp: `--color-red-50` behind `--color-red-800` text, keep the words, and do not rely on red alone. The primary button should be a ramp step such as `--color-gray-900`, not a new hex.
-
-## P1
-- **hierarchy** — The title is 42px and gray, so the heading level is doing the styling. Drop it to 20px or 24px, near-black, weight 600. The title is a label. The status and amount should lead.
-- **layout-spacing** — Padding is 10px, off the scale, and the card is width 100%. Use 24px padding and a max-width of 512px.
-- **typography** — 42px and 13px are off the type scale. Use 24px and 14px.
-
-## P2
-- **finishing-touches** — Replace the gray border with a `--gray-100` background or an elevation-1 shadow.
-
-## Not checked
-- images, depth beyond the border note: no assets or layered surfaces in the snippet.
-```
-
-After the P0 and P1 fixes:
-
-```html
-<article style="max-width: 512px; padding: 24px; background: oklch(96.7% 0.003 264.542); border-radius: 6px; font-family: system-ui, sans-serif">
-  <p style="margin: 0; font-size: 14px; color: oklch(44.6% 0.03 256.802)">Invoice 1842</p>
-  <h1 style="margin: 4px 0 0; font-size: 24px; line-height: 1.25; font-weight: 600; color: oklch(21% 0.034 264.665)">$2,400 overdue</h1>
-  <p style="margin: 8px 0 0; font-size: 14px; color: oklch(44.4% 0.177 26.899); background: oklch(97.1% 0.013 17.38); display: inline-block; padding: 4px 8px">Payment is 12 days late</p>
-  <div style="margin-top: 24px; display: flex; gap: 16px; align-items: center">
-    <button style="background: oklch(21% 0.034 264.665); color: white; border: 0; border-radius: 6px; padding: 8px 12px">Send reminder</button>
-    <button style="background: none; border: 0; color: oklch(44.6% 0.03 256.802); text-decoration: underline">Void</button>
-  </div>
+<article style="width: 100%; padding: 10px; border-radius: 8px; box-sizing: border-box; background: #fff">
+  <h2 style="font-size: 24px; color: #111">Invoice 1842</h2>
+  <p style="font-size: 13px; color: #aaa">Status: overdue</p>
+  <button>Send reminder</button>
 </article>
+```
+
+A review based on the supplied code and container dimensions can say the following.
+
+- P1, color. The status uses `#aaa` against white, which calculates to 2.32:1. At 13px it needs at least 4.5:1. Use the project's darker supporting-text token. The current status text is hard to read.
+- Clear. The word "overdue" communicates the status without color. The 100% width fits the known parent. The metadata size, compact spacing, and radius follow project tokens.
+- Not checked. Keyboard behavior, focus, accessible announcements, rendered overflow, and other runtime states need direct verification.
+- Principles applied. `color / Measure text contrast` led to a darker status ink. `ui-review / Respect product conventions` kept the established sizes and radius. `ui-review / Evidence before conclusions` prevented an unsupported width or color-only finding.
+
+After the fix, the status can use a verified product token. This example uses `#595959`, which calculates to 7.00:1 against white.
+
+```css
+:root { --text-supporting: #595959; }
+.invoice-status { color: var(--text-supporting); }
 ```

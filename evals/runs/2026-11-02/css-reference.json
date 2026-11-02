@@ -1,0 +1,52 @@
+{
+  "revised": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "Small container uses the 16px floor and minor-third scale",
+        "actual": 39.8131,
+        "pass": true
+      },
+      {
+        "name": "Wide container scales from its own width",
+        "actual": 43.0124,
+        "pass": true
+      },
+      {
+        "name": "Local ratio recalculates dependent steps",
+        "actual": 121.5,
+        "pass": true
+      },
+      {
+        "name": "Derived primary retains its selected lightness and hue",
+        "actual": "oklch(0.439 0.249606 277.023)",
+        "pass": true
+      }
+    ]
+  },
+  "original": {
+    "pass": false,
+    "checks": [
+      {
+        "name": "Small container uses the 16px floor and minor-third scale",
+        "actual": 39.8131,
+        "pass": true
+      },
+      {
+        "name": "Wide container scales from its own width",
+        "actual": 43.0124,
+        "pass": true
+      },
+      {
+        "name": "Local ratio recalculates dependent steps",
+        "actual": 39.8131,
+        "pass": false
+      },
+      {
+        "name": "Derived primary retains its selected lightness and hue",
+        "actual": "oklch(0.439 0.249606 277.023)",
+        "pass": true
+      }
+    ]
+  }
+}

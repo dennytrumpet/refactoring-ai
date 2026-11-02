@@ -7,20 +7,24 @@ description: Use when choosing a palette, building or deriving an OKLCH shade ra
 
 **Trigger:** Load when introducing or changing color, including grays, status, and text on a colored surface.
 
+## Apply this skill
+
+Follow the user's requirements and the project's existing design system first. Use these defaults where the project leaves a choice open. Treat a departure as a finding only when you can show a usability, accessibility, or consistency problem.
+
 ## Principles
 
-- Author UI color in OKLCH. L is perceptual lightness, so equal steps in L look evenly spaced. C is chroma, how colorful the step is. H is the hue in degrees. Hex and RGB hide those relationships, so do not build a ramp by nudging hex.
-- A five-swatch brand sheet is not a product palette. You need a gray ramp for text and surfaces, one or two primaries for actions, and accent ramps for success, warning, and danger. A complex product can need on the order of ten hues.
-- Define every shade before you use it. Do not call `lighten()` or `darken()` at the component to invent a new step. That manufactures near-duplicates. Derive the 11 steps once. See Deriving colors. Use the fixed scale 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950. Do not insert a 450 because two neighbors feel close. `color-mix(in oklch, ...)` is for a tint, a hover, an active state, or an alpha overlay, not for a new ramp stop.
-- Lightness is L. Lighten and darken by changing L, not by rotating hue. Hold H nearly constant on a ramp. A small deliberate drift is enough (the reference blue moves from about 255 toward 268 as it gets darker). A jump that reads as a different color belongs on another ramp.
-- Keep chroma up for as long as the gamut allows, so the light and dark steps do not collapse to gray. C peaks through the middle, where displays can actually show it. Very high L and very low L cannot hold that chroma in sRGB, so lower C on 50, 100, 900, and 950 instead of letting the browser clip the color into a muddy neighbor. The reference blue peaks near 0.25 at 600, and is about 0.01 at 50 and 0.09 at 950.
-- Grays are not zero chroma. Give them a little C at a cool hue, around 250–265 in the reference, with C staying under about 0.04. The darkest ink is gray-950, not pure black.
-- Contrast is measured on the painted pixels. L is not a contrast ratio. Normal text under about 18px needs at least 4.5:1. Larger text needs at least 3:1. White text on a 600 or 700 fill often makes the block dominate the page. Prefer dark text on a 50 or 100 tint when the message should stay quiet. On a colored surface, secondary text is another step of the same ramp, not a neutral gray.
-- Color supports a message the interface already states. Add an icon, a word, or a lighter-versus-darker pair. Never use hue as the only channel.
+- **Choose a useful color space.** Keep the project's palette and supported color formats. For a new palette, OKLCH makes lightness, chroma, and hue explicit. L is perceptual lightness. C is chroma, how colorful the step is. H is the hue in degrees. Do not build a ramp by guessing changes to hex digits.
+- **Build a usable palette.** A five-swatch brand sheet is not a product palette. You need a gray ramp for text and surfaces, one or two primaries for actions, and accent ramps for success, warning, and danger. A complex product can need on the order of ten hues.
+- **Define reusable shade steps.** Define repeated shades in the palette rather than inventing near-duplicates inside components. Keep an established scale. For a new palette, the reference offers 11 stops from 50 to 950. See Deriving colors. A tint, hover, active state, or alpha overlay may use `color-mix(in oklch, ...)` without becoming another ramp stop.
+- **Separate lightness from hue.** Lightness is L. Lighten and darken by changing L, not by rotating hue. Hold H nearly constant on a ramp. A small deliberate drift is enough (the reference blue moves from about 255 toward 268 as it gets darker). A jump that reads as a different color belongs on another ramp.
+- **Check chroma against gamut.** Keep chroma up for as long as the gamut allows, so the light and dark steps do not collapse to gray. C peaks through the middle, where displays can actually show it. Very high L and very low L cannot hold that chroma in sRGB, so lower C on 50, 100, 900, and 950 instead of letting the browser clip the color into a muddy neighbor. The reference blue peaks near 0.25 at 600, and is about 0.01 at 50 and 0.09 at 950.
+- **Choose neutral temperature deliberately.** Neutral colors may be achromatic, warm, or cool. The reference uses a cool hue around 250–265 with C under about 0.04. Choose the temperature for the product, and verify the actual text and surface pairs.
+- **Measure text contrast.** Calculate contrast for the foreground and its actual background, including composited transparency. L is not a contrast ratio. Normal text needs at least 4.5:1. Large text needs at least 3:1 and means at least 24 CSS px regular or 18.67 CSS px bold. These thresholds come from [WCAG contrast minimum](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum). Prefer dark text on a light tint when a message should stay quiet. On a colored surface, choose supporting ink that remains readable and fits the palette.
+- **Communicate beyond hue.** Color supports a message the interface already states. Add an icon, a word, or a lighter-versus-darker pair. Never use hue as the only channel.
 
 ## Defaults
 
-Eleven steps, named `--color-<hue>-<step>`. This is the reference palette: cool gray, blue, green, and red. Copy these tokens. Do not re-mix them.
+Eleven steps, named `--color-<hue>-<step>`. This reference palette provides cool gray, blue, green, and red when the project has no palette. The examples in this suite demonstrate these primitives. In product code, map them to the project's semantic roles.
 
 ```css
 :root {
@@ -74,6 +78,7 @@ Eleven steps, named `--color-<hue>-<step>`. This is the reference palette: cool 
 
   --ink: var(--color-gray-900);
   --ink-secondary: var(--color-gray-600);
+  --ink-tertiary: var(--color-gray-600);
   --canvas: white;
   --surface-sunken: var(--color-gray-100);
 }
@@ -89,18 +94,32 @@ Eleven steps, named `--color-<hue>-<step>`. This is the reference palette: cool 
 
 Button fill: `--color-blue-600`. Alert background: `--color-red-50`. Alert text: `--color-red-800`. Check that pair against 4.5:1 before shipping. Add warning the same way, on this scale, and use accents sparingly.
 
-`oklch()` is ignored by browsers that do not understand it, and a C that is past the display gamut gets mapped to a duller color. Put the sRGB rendering of the same step first, then the OKLCH value. The ends of the ramp already use less chroma so that mapping has less to do.
+When older browsers matter, provide static sRGB values and gate the enhanced declarations. A custom property can contain unsupported color syntax until substitution. An invalid winning declaration then uses its initial or inherited value rather than an earlier hex declaration. See [CSS invalid variables](https://www.w3.org/TR/css-variables/#invalid-variables).
 
 ```css
 .button {
-  background: #2563eb; /* sRGB rendering of --color-blue-600 */
-  background: var(--color-blue-600);
+  background: #2563eb;
+}
+@supports (color: oklch(50% 0.1 250)) {
+  .button { background: var(--color-blue-600); }
 }
 ```
 
+## Verified text pairs
+
+Use these reference pairs for normal text. Recalculate when the tokens or backgrounds change. Run `python3 scripts/check-contrast.py` from the repository to check the declared values. This calculation does not inspect rendered transparency, images, or browser gamut mapping.
+
+| Foreground | Background | Minimum |
+| --- | --- | --- |
+| `var(--ink)` | `var(--canvas)` | 4.5 |
+| `var(--ink-secondary)` | `var(--canvas)` | 4.5 |
+| `var(--ink-tertiary)` | `var(--canvas)` | 4.5 |
+| `white` | `var(--color-gray-900)` | 4.5 |
+| `var(--color-red-800)` | `var(--color-red-50)` | 4.5 |
+
 ## Deriving colors
 
-Name product colors by role, not by appearance. Use `primary`, `secondary`, `accent`, `core` for the neutral surface, `tone` for dark neutral text, and `info`, `success`, `warning`, and `critical`. Do not name a product token `blue-500`. A theme swap then changes the base color and leaves every call site alone. The hue names in Defaults are the reference sheet. Product CSS should use these roles. The step numbers are the same 50 to 950 stops.
+Prefer semantic roles at product call sites so a theme can change without editing every component. Keep the project's role names. For a new system, the reference uses `primary`, `secondary`, `accent`, `core` for the neutral surface, `tone` for dark neutral text, and `info`, `success`, `warning`, and `critical`. Primitive hue ramps can remain underneath those roles. The step numbers are the same 50 to 950 stops.
 
 The reusable ramp is [references/derived-colors.css](references/derived-colors.css). One base color fills a whole ramp with relative color syntax.
 
@@ -110,7 +129,7 @@ The reusable ramp is [references/derived-colors.css](references/derived-colors.c
 
 `oklch(from ...)` keeps the origin hue in `h`, and replaces lightness and chroma with the step. Repeat that line for `secondary`, `accent`, `core`, `tone`, `info`, `success`, `warning`, and `critical`. The file shows step 600 for each. The other ten stops are the same substitution.
 
-Chroma follows `c * sin((1 - L) * pi) + --c-base`. It peaks at mid lightness and tapers toward white and black, so the ends stay in gamut and the tints do not look washed out. `--c-base` is the minimum chroma to tolerate, so the extremes keep a hint of hue. The `--l-*` numbers are a starting set. Tune them. Keep the chroma math.
+Chroma follows `c * sin((1 - L) * pi) + --c-base`. This heuristic peaks at mid lightness and tapers toward white and black. It does not guarantee that a shade is in gamut or that a text pair has enough contrast. Gamut depends on hue as well as lightness and chroma. Inspect the generated ramp, lower chroma where needed, and calculate contrast for each pair used. Tune the formula or use a static ramp when it does not suit the palette.
 
 `--c-500` stores the token `c`. It does not resolve on its own. Custom properties are substituted as tokens where they are used, inside `oklch(from ...)`. Only then does `c` mean that origin color's chroma. The same `--c-500` is valid for every role. It is invalid as a standalone color or length.
 
@@ -134,15 +153,19 @@ Relative color syntax and `sin()` work in current Chrome, Safari, and Firefox. F
 
 ## Checklist
 
-- [ ] New ramp stops are the named 11-step tokens, not a fresh hex and not a `lighten()` at the call site. Tint, hover, active, and overlay may use `color-mix(in oklch, ...)`.
-- [ ] Product tokens use role names. Appearance names such as `blue-500` stay on the reference sheet.
-- [ ] Each ramp is OKLCH. L is what changes from 50 to 950, and the steps look even in lightness.
-- [ ] C stays high through the middle and drops at the light and dark ends only as far as the gamut requires.
-- [ ] H on one ramp drifts a little. It does not jump to a different color.
-- [ ] Grays use a cool hue and a small chroma. The darkest ink is gray-950, not `#000`.
-- [ ] Where older browsers matter, an sRGB fallback is declared before `oklch()`.
+- [ ] Repeated colors use the project's tokens. When adopting the reference palette, reuse its 11 stops instead of inventing near-duplicates. A different established scale or format is valid.
+- [ ] Product call sites use established role tokens where available. Reference primitives do not replace the product's theme system.
+- [ ] New OKLCH ramps change L deliberately across the scale. Existing palettes do not need conversion to pass review.
+- [ ] New ramps retain useful chroma without relying on unverified gamut claims.
+- [ ] Hue changes within a new ramp are deliberate and do not create an unintended color change.
+- [ ] Neutral temperature fits the product. Neutral text pairs meet contrast requirements.
+- [ ] Where older browsers matter, static sRGB values remain effective when enhanced color syntax is unsupported.
 - [ ] Body text meets 4.5:1. Large text meets 3:1. Quiet colored messages are dark text on a 50 or 100 tint.
 - [ ] Status and chart series still communicate with an icon, a word, or a lightness difference when hue is removed.
+
+## Output
+
+In your final response, name the principles from this skill that changed a material choice and state the choice each changed. Use `skill / Principle name` with a short explanation. Cite only skills you read, and omit principles that did not affect the work.
 
 ## Example
 

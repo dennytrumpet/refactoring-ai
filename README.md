@@ -16,9 +16,13 @@ Inspired by Refactoring UI by Adam Wathan and Steve Schoger. This plugin is an u
 | `depth` | Elevation, shadows, inset surfaces, and overlapping layers. |
 | `images` | Photos, icons, screenshots, and user uploads. |
 | `finishing-touches` | Empty states, accents, backgrounds, and fewer borders. |
-| `ui-review` | Audit a screen or component against the other checklists and return prioritized fixes. |
+| `ui-review` | Review visual evidence, report prioritized fixes, and identify separate functional accessibility checks. |
 
-Start with `design-mode` on a new feature. Use `ui-review` before calling a screen done.
+Start with `design-mode` on a new feature. Use `ui-review` for the visual pass, then complete the project's functional accessibility checks before calling a screen done.
+
+The user's requirements and the existing product design system take precedence over the suggested defaults. A different type scale, palette, or radius is not a defect by itself.
+
+Each skill names its principles and asks the agent to report which ones changed a material decision. The output connects a principle to a concrete choice. For example, "layout-spacing / Space explains grouping. I used the existing small gap inside each field and a larger gap between fields." Agents cite only skills they read and omit principles that did not affect the work.
 
 ## Layout
 
@@ -27,7 +31,11 @@ Start with `design-mode` on a new feature. Use `ui-review` before calling a scre
 .claude-plugin/plugin.json      Claude Code plugin manifest
 .claude-plugin/marketplace.json Claude Code marketplace catalog
 skills/<name>/SKILL.md          shared skills, one folder each
-scripts/validate-skills.py      frontmatter check
+scripts/validate-skills.py      frontmatter and local-link checks
+scripts/check-contrast.py       declared reference text-pair checks
+scripts/prepare-evaluation.py   isolated paired assignments
+tests/                         checker and CSS reference tests
+evals/                         behavioral scenarios and run procedure
 ```
 
 The Cursor manifest points `skills` at `./skills/`. Claude Code scans that directory by default, so its manifest does not set `skills` again. There is one copy of each skill.
@@ -76,9 +84,15 @@ Copy each `skills/<name>` directory as-is so `SKILL.md` stays one level down. Th
 
 ```bash
 python3 scripts/validate-skills.py
+python3 scripts/check-contrast.py
+python3 -m unittest discover -s tests -v
 ```
 
-The script fails if a skill is missing frontmatter, if `name` does not match the folder, or if `description` is empty.
+The structural validator checks frontmatter, folder names, descriptions, and local Markdown link targets. The contrast checker calculates the explicit reference text pairs in `color`. It supports opaque hex, white, black, literal OKLCH, and simple token aliases. It rejects unsupported syntax and out-of-sRGB values instead of guessing browser behavior.
+
+Open [the CSS reference page](tests/css-reference.html) in a browser to verify the fluid scale's container sizing and local overrides. It displays each result and an overall pass or fail.
+
+These checks validate declared artifacts. They do not establish that an agent produces better UI. Use [the paired evaluation procedure](evals/README.md) to compare real outputs with and without the suite.
 
 ## License
 

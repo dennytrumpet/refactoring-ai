@@ -9,9 +9,12 @@
   --golden-ratio: 1.618;
   --text-ratio: var(--minor-third);
   --text-min: 16;
-  --text-max: calc(var(--text-min) * var(--text-ratio));
   --screen-min: 640;
   --screen-max: 1536;
+}
+
+:root, .prose {
+  --text-max: calc(var(--text-min) * var(--text-ratio));
   --text-diff: calc(var(--text-max) - var(--text-min));
   --screen-diff: calc(var(--screen-max) - var(--screen-min));
   --fluid-size: calc(var(--text-min) * 1px + (100cqw - var(--screen-min) * 1px) * var(--text-diff) / var(--screen-diff));

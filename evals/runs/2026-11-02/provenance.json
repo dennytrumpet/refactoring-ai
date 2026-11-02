@@ -1,0 +1,28 @@
+{
+  "conditions": {
+    "cedar": "baseline",
+    "maple": "skills"
+  },
+  "sources": {
+    "skills/color/SKILL.md": "d10e35315b20b6ea62c2d7178ba814e58e8add05e1e72ce65513d54c4ee55d8d",
+    "skills/color/references/derived-colors.css": "1f312eb8cc117c3e782c5c7439fe88bc21c7c4b6dae21dc003407163bfb1f5f8",
+    "skills/depth/SKILL.md": "73ac422e879262eef2f81efceb2b2fe3d3d0a00eceb3a12f217b171ffdb6d5cd",
+    "skills/design-mode/SKILL.md": "7c14fdcc0eddf92618ddd8212f6bed249dfed76f5fc44366fab009730bda7ce9",
+    "skills/finishing-touches/SKILL.md": "e9ac3e23682d660f377d81c7fb6b1690c5a1770e4cb63b8e0784c4f44186b9ab",
+    "skills/hierarchy/SKILL.md": "758fe4690278bcf5c6b6a4135c246a7581ae39472bdacccff111d97dde73dff4",
+    "skills/images/SKILL.md": "58e875145c486e8ebced79244900e20a3861834782b954d200d7810727ddf569",
+    "skills/layout-spacing/SKILL.md": "d183146f0228c70b54bd2a1fcf33a3406fe8ad9c32cb252efb10118fb169dcb2",
+    "skills/typography/SKILL.md": "2a6f63801ebc6191c9a4eeb87e0b38563a667a8f76b2139151efbd9b15e0d39a",
+    "skills/typography/references/fluid-type.css": "17e154fa96f3b96aee54ea8a6e2ee1ba00eeccb7ddfd6ddf2dcc2ce50f4b5817",
+    "skills/ui-review/SKILL.md": "707ab314b14f12272165e395872c67fd91ba10dfc759955740fb353231091234",
+    "evals/scenarios.json": "dc6eea11cbaca2a522fd0de4ab5c85678bfc21992e18dce7f613590a33f99584",
+    "evals/fixtures/booking.html": "f2584ff328912ba91d57f30473f9b82f0d9e4dbe0aaae6e6a276b389fead13f2",
+    "evals/fixtures/invoices.html": "41cbff2ea9c45b3c74075344b752d90677897a4c74a359b2f36bafac4dac5c8a",
+    "evals/fixtures/profile.html": "4f1ea4a27713f6b6a3673a66e813bc0c2c01e937365c779bfb334f57a5927254"
+  },
+  "model": "gpt-6.1-sol",
+  "reasoning": "No override supplied. The harness default applied to both participants.",
+  "baseline_reused": "Cedar was completed in the first preparation. Its requests and source fixtures were identical. Maple was run afresh after checklist corrections.",
+  "isolation_limit": "Fresh agents had no parent chat history and were scoped to their own assignment folders. Harness-provided tool descriptions and the global skill catalog could not be removed. Full tool transcripts were not inspected.",
+  "snapshot_note": "Hashes describe the exact guidance copied for Maple. A later prose consistency pass softened three remaining checklist statements and normalized blank lines. The named-principle output contract is unchanged."
+}

@@ -7,17 +7,21 @@ description: Use when starting a screen, feature, or visual redesign, before pic
 
 **Trigger:** Load this before building a new view or restyling one, and stay here until the feature, fidelity, and personality are decided.
 
+## Apply this skill
+
+Follow the user's requirements and the project's existing design system first. Use these defaults where the project leaves a choice open. Treat a departure as a finding only when you can show a usability, accessibility, or consistency problem.
+
 ## Principles
 
-- Design the next feature, not the application shell. Navigation, page width, and logo placement fall out of real screens. A share-file task needs a recipient, a note, an expiry, and a send action long before it needs a sidebar.
-- Stay low-fidelity until the structure works. Ignore typefaces, shadows, and icons at the start. If the tool keeps pulling you into detail, sketch with a fat marker or block boxes in grayscale. Color comes after spacing, size, and contrast already explain the screen.
-- Treat mockups as disposable. Ship a working slice instead of specifying every edge case up front. Design the smallest useful version, build it, then design the next feature. Drop anything you are not ready to implement. A notes field without attachments is shippable; a paperclip that implies attachments you will not build blocks the whole feature.
-- Pick a personality on purpose and keep it. The concrete levers are type genre, color temperature, corner radius, and voice. A serious tool can use a neutral or serif face, near-zero radius, and plain language. A playful tool can use a rounded face, large radius, and casual labels. Do not mix sharp and very round corners in one product. Look at products your users already trust, and do not clone a direct competitor. When you name a family, paste the matching `font-family` from `typography` after it.
-- Decide from a short list. Predefine type size, weight, line height, color, space, size, radius, border width, shadow, and opacity. When choosing, try the scale step you guess and its two neighbors. Two of the three are usually wrong. Add a new system the second time you hesitate over the same kind of value. Do not invent a one-off pixel.
+- **Feature before shell.** Design the next feature, not the application shell. Navigation, page width, and logo placement fall out of real screens. A share-file task needs a recipient, a note, an expiry, and a send action long before it needs a sidebar.
+- **Structure before decoration.** Stay low-fidelity until the structure works. Ignore typefaces, shadows, and icons at the start. If the tool keeps pulling you into detail, sketch with a fat marker or block boxes in grayscale. Color comes after spacing, size, and contrast already explain the screen.
+- **Ship the useful slice.** Treat mockups as disposable. Ship a working slice instead of specifying every edge case up front. Design the smallest useful version, build it, then design the next feature. Drop anything you are not ready to implement. A notes field without attachments is shippable; a paperclip that implies attachments you will not build blocks the whole feature.
+- **Choose a coherent personality.** Pick a personality on purpose and keep it. The concrete levers are type genre, color temperature, corner radius, and voice. A serious tool can use a neutral or serif face, near-zero radius, and plain language. A playful tool can use a rounded face, large radius, and casual labels. Use the project's radius roles consistently. Different roles can use different radii, such as a pill badge and a rectangular panel. Look at products your users already trust, and do not clone a direct competitor. When you name a family, paste the matching `font-family` from [typography](../typography/SKILL.md) after it.
+- **Constrain repeated decisions.** Decide from a short list. Predefine type size, weight, line height, color, space, size, radius, border width, shadow, and opacity. When choosing, try the scale step you guess and its two neighbors. Two of the three are usually wrong. Add a new system the second time you hesitate over the same kind of value. Prefer an existing token. Add a value when the content, optical alignment, or a documented product requirement earns the exception.
 
 ## Defaults
 
-Pick one personality and only its tokens:
+When the project has no established direction, use one of these starting points:
 
 | Personality | Type | Radius | Hue feel | Voice |
 | --- | --- | --- | --- | --- |
@@ -29,34 +33,38 @@ Shared constraints until a topic skill replaces them:
 
 - Spacing and size steps stay at least ~25% apart. Start from 16.
 - Two weights only for UI text: 400–500 for body, 600–700 for emphasis. No weight under 400 below 20px.
-- One radius for the product.
+- A small set of radius roles, reused consistently.
 - Grayscale first: near-black, mid gray, light gray on an off-white canvas.
 
 ## Checklist
 
 Apply this to the diff or the screenshot before any polish.
 
-- [ ] The change is one feature a user can finish, not a new app frame.
+- [ ] The scope serves the requested task. New application chrome has a concrete purpose in that task.
 - [ ] Controls that imply unbuilt behavior are gone.
 - [ ] With color removed, size, weight, and space still show what matters.
-- [ ] Personality is named, and radius, type genre, and tone match that one choice.
-- [ ] New sizes, colors, and shadows are scale steps, not fresh arbitrary values.
+- [ ] Type, radius roles, and tone fit the established product or a named direction for a new product.
+- [ ] Repeated sizes, colors, and shadows use project tokens. Any additions have a concrete purpose.
 - [ ] The next skill below is loaded only for a decision this change actually makes.
 
 ## Load a topic skill
 
 | You are deciding | Load |
 | --- | --- |
-| What should stand out, labels, actions | `hierarchy` |
-| Space, width, columns, grouping | `layout-spacing` |
-| Font, measure, line height, alignment | `typography` |
-| Palette, shades, contrast, status | `color` |
-| Shadows, inset, overlap | `depth` |
-| Photos, icons, avatars, uploads | `images` |
-| Empty states, borders, accents, defaults | `finishing-touches` |
-| Whether the screen is ready | `ui-review` |
+| What should stand out, labels, actions | [hierarchy](../hierarchy/SKILL.md) |
+| Space, width, columns, grouping | [layout-spacing](../layout-spacing/SKILL.md) |
+| Font, measure, line height, alignment | [typography](../typography/SKILL.md) |
+| Palette, shades, contrast, status | [color](../color/SKILL.md) |
+| Shadows, inset, overlap | [depth](../depth/SKILL.md) |
+| Photos, icons, avatars, uploads | [images](../images/SKILL.md) |
+| Empty states, borders, accents, defaults | [finishing-touches](../finishing-touches/SKILL.md) |
+| Whether the screen is ready | [ui-review](../ui-review/SKILL.md) |
 
-For a pass over a whole screen, load `ui-review` and let it run the other checklists. Do not load every topic skill "just in case" on a one-line copy change.
+For a pass over a whole screen, load [ui-review](../ui-review/SKILL.md) and let it run the other checklists. Do not load every topic skill "just in case" on a one-line copy change.
+
+## Output
+
+In your final response, name the principles from this skill that changed a material choice and state the choice each changed. Use `skill / Principle name` with a short explanation. Cite only skills you read, and omit principles that did not affect the work.
 
 ## Example
 
@@ -79,4 +87,4 @@ After, the only UI is the feature, in grayscale, plain personality, 6px radius:
 </form>
 ```
 
-Load `hierarchy` if the submit action is competing with secondary links, `layout-spacing` before tuning the gaps, and `color` only after the grayscale version reads clearly. Waitlist and attachments stay out until a later cycle.
+Load [hierarchy](../hierarchy/SKILL.md) if the submit action is competing with secondary links, [layout-spacing](../layout-spacing/SKILL.md) before tuning the gaps, and [color](../color/SKILL.md) only after the grayscale version reads clearly. Waitlist and attachments stay out until a later cycle.
