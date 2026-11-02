@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meridian booking</title>
+<style>
+body { margin: 0; padding: 16px; font: 16px/1.5 system-ui, sans-serif; background: #fff; color: #222; }
+form { width: 600px; }
+p { font-size: 20px; font-weight: 400; color: #fff; background: #888; padding: 16px; }
+.row { display: flex; gap: 16px; white-space: nowrap; }
+input, button { font: inherit; padding: 8px 12px; }
+</style>
+<h1>Book a workshop</h1>
+<p>Choose the date that works for your team.</p>
+<form action="/bookings" method="post">
+<div class="row"><span>Your preferred workshop date and starting time</span><input name="starts_at" type="datetime-local"></div>
+<button type="submit">Request a workshop for everyone in your department</button>
+</form>
+</html>

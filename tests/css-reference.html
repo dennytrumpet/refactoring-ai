@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS reference checks</title>
+<link rel="stylesheet" href="../skills/typography/references/fluid-type.css">
+<link rel="stylesheet" href="../skills/color/references/derived-colors.css">
+<style>
+body { font: 16px/1.5 system-ui, sans-serif; }
+.sample { visibility: hidden; position: absolute; }
+#small, #local { width: 400px; }
+#wide { width: 1000px; }
+#local { --text-ratio: 1.5; }
+#derived { background: var(--color-primary-600); }
+</style>
+<h1>CSS reference checks</h1>
+<pre id="result">Waiting for stylesheets.</pre>
+<div id="small" class="prose sample"><h1>Small container</h1></div>
+<div id="wide" class="prose sample"><h1>Wide container</h1></div>
+<div id="local" class="prose sample"><h1>Local ratio</h1></div>
+<div id="derived" class="sample">Derived primary</div>
+<script>
+window.addEventListener('load', () => {
+  const small = parseFloat(getComputedStyle(document.querySelector('#small h1')).fontSize);
+  const wide = parseFloat(getComputedStyle(document.querySelector('#wide h1')).fontSize);
+  const local = parseFloat(getComputedStyle(document.querySelector('#local h1')).fontSize);
+  const derived = getComputedStyle(document.querySelector('#derived')).backgroundColor;
+  const checks = [
+    { name: 'Small container uses the 16px floor and minor-third scale', actual: small, pass: Math.abs(small - 39.81312) < 0.01 },
+    { name: 'Wide container scales from its own width', actual: wide, pass: Math.abs(wide - 43.01239) < 0.01 },
+    { name: 'Local ratio recalculates dependent steps', actual: local, pass: Math.abs(local - 121.5) < 0.01 },
+    { name: 'Derived primary retains its selected lightness and hue', actual: derived, pass: /^oklch\(0\.439\s/.test(derived) && /277\.023\)/.test(derived) }
+  ];
+  document.querySelector('#result').textContent = JSON.stringify({ pass: checks.every(check => check.pass), checks }, null, 2);
+});
+</script>
+</html>

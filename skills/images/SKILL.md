@@ -7,19 +7,23 @@ description: Use when placing photos, illustrations, icons, screenshots, avatars
 
 **Trigger:** Load when adding or reviewing any image, icon, screenshot, or user upload.
 
+## Apply this skill
+
+Follow the user's requirements and the project's existing design system first. Use these defaults where the project leaves a choice open. Treat a departure as a finding only when you can show a usability, accessibility, or consistency problem.
+
 ## Principles
 
-- A weak photo sinks an otherwise careful layout. If the picture has to be specific, use a real photographer. If it can be generic, use a strong stock source. Do not design around a placeholder and plan to swap in a phone snapshot later. The lighting and crop will not match.
-- Text on a photo fails when the photo is both very light and very dark. White type dies in the highlights. Dark type dies in the shadows. Calm the image before you restyle the type. A translucent black scrim helps light type. A white scrim helps dark type. Lowering the photo's own contrast, then correcting brightness, targets the problem areas more carefully than a full-bleed wash. A single color overlay (reduce contrast, remove saturation, then a solid multiply) ties the photo to the product hue. If you need to keep more of the photo's range, add a wide, unoffset text shadow that reads as a soft halo, and reduce contrast a little less.
-- Every asset has a size it was drawn for. Blowing a bitmap past its pixels looks soft. Blowing a 16–24px icon up to hero size stays crisp and still looks crude, because the drawing has no detail. Put that small icon inside a shape that fills the space, and keep the glyph near its native size. Shrinking a full-app screenshot until body text is a few pixels tall invites squinting. Capture a narrower viewport, crop to the relevant part, or redraw a simplified frame where text becomes bars. The same problem hits tiny marks: a logo drawn at 128px turns to mud at 16px. Redraw a simpler mark at the target size.
-- User uploads will not match your crop, contrast, or background. Lock them in a fixed frame and cover-crop. Do not let intrinsic aspect ratios reflow a gallery. When the upload's background matches the page, the edge disappears. Prefer a soft inner shadow or a translucent inner border over a solid stroke that clashes with the picture.
+- **Choose suitable source images.** A weak photo sinks an otherwise careful layout. If the picture has to be specific, use a real photographer. If it can be generic, use a strong stock source. Do not design around a placeholder and plan to swap in a phone snapshot later. The lighting and crop will not match.
+- **Protect text over images.** Text on a photo fails when the photo is both very light and very dark. White type dies in the highlights. Dark type dies in the shadows. Calm the image before you restyle the type. A translucent black scrim helps light type. A white scrim helps dark type. Lowering the photo's own contrast, then correcting brightness, targets the problem areas more carefully than a full-bleed wash. A single color overlay (reduce contrast, remove saturation, then a solid multiply) ties the photo to the product hue. If you need to keep more of the photo's range, add a wide, unoffset text shadow that reads as a soft halo, and reduce contrast a little less.
+- **Match artwork to display size.** Every asset has a size it was drawn for. Blowing a bitmap past its pixels looks soft. Blowing a 16–24px icon up to hero size stays crisp and still looks crude, because the drawing has no detail. Put that small icon inside a shape that fills the space, and keep the glyph near its native size. Shrinking a full-app screenshot until body text is a few pixels tall invites squinting. Capture a narrower viewport, crop to the relevant part, or redraw a simplified frame where text becomes bars. The same problem hits tiny marks: a logo drawn at 128px turns to mud at 16px. Redraw a simpler mark at the target size.
+- **Frame unpredictable uploads.** User uploads will not match your crop, contrast, or background. Use predictable frames for avatars and thumbnail galleries. Cover-crop when losing the edges is acceptable. Use `object-fit: contain` or the natural ratio for diagrams, documents, and other images whose full content matters. When the upload's background matches the page, the edge disappears. Prefer a soft inner shadow or a translucent inner border over a solid stroke that clashes with the picture.
 
 ## Defaults
 
 | Asset | Intended size | Treatment |
 | --- | --- | --- |
 | UI icon | 16, 20, or 24 | Do not render above 32 without a surrounding shape |
-| Icon in a feature tile | glyph 24 inside a 48 or 64 shape | Shape uses a ramp step from `color` |
+| Icon in a feature tile | glyph 24 inside a 48 or 64 shape | Shape uses a ramp step from [color](../color/SKILL.md) |
 | Avatar | fixed square, 32–96 | `object-fit: cover` |
 | Hero photo with text | full bleed of its region | scrim or contrast reduction under the type |
 | Product screenshot | captured near display size | shrink by less than half, or crop |
@@ -36,8 +40,12 @@ User frame: fixed aspect ratio, `object-fit: cover`, `box-shadow: inset 0 0 0 1p
 - [ ] Icons are near the size they were drawn. Enlarged spots use a containing shape.
 - [ ] Screenshots are not scaled so far that UI text becomes illegible. Crop, recapture, or simplify instead.
 - [ ] Tiny marks are redrawn for that size.
-- [ ] User images sit in a fixed frame with cover cropping.
+- [ ] Uploads cannot break the layout. Cropping preserves the image's purpose, and full-content images remain visible.
 - [ ] Uploads that could blend into the page have an inner shadow or translucent inner edge, not a heavy clashing border.
+
+## Output
+
+In your final response, name the principles from this skill that changed a material choice and state the choice each changed. Use `skill / Principle name` with a short explanation. Cite only skills you read, and omit principles that did not affect the work.
 
 ## Example
 

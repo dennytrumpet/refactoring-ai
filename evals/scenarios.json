@@ -1,0 +1,37 @@
+[
+  {
+    "id": "profile",
+    "fixture": "profile.html",
+    "request": "Add an optional short biography field to the profile form. Keep the product's existing design language and save behavior. Give brief design notes after the change.",
+    "criteria": [
+      "The biography control has a programmatic label and an optional value.",
+      "The established 15px text, 10px spacing, 10px radius, and brand color remain in use.",
+      "The existing submit behavior remains intact, with no unrelated application chrome.",
+      "Design notes explain a concrete choice. For guidance-assisted work, a named principle is tied to that choice."
+    ]
+  },
+  {
+    "id": "invoices",
+    "fixture": "invoices.html",
+    "request": "Review this invoice panel for visual usability problems. The supplied measurements describe the rendered panel. Report actionable findings and any checks you cannot establish from this evidence. Save your review as review.md.",
+    "criteria": [
+      "Written statuses are not falsely reported as color-only.",
+      "The documented container, compact scale, font sizes, radii, and paired actions do not generate unsupported defects.",
+      "No contrast ratio or runtime result is invented.",
+      "Functional accessibility checks remain unverified rather than being called passed.",
+      "The answer can return no visual findings. For guidance-assisted work, principle notes explain the decisions actually made."
+    ]
+  },
+  {
+    "id": "booking",
+    "fixture": "booking.html",
+    "request": "Improve this booking form for a narrow phone viewport and long translated labels. Fix source-visible readability and labeling problems while keeping the existing submission behavior. Give brief design notes and distinguish changes from checks you have not run.",
+    "criteria": [
+      "The 20px regular text on #888 is treated as normal text needing 4.5:1, rather than large text needing 3:1.",
+      "The input receives a programmatic label and the submit control remains a native button.",
+      "The fixed-width overflow and wrapping constraints are corrected without shrinking important text.",
+      "Existing form submission is preserved.",
+      "Unperformed viewport, keyboard, zoom, or assistive-technology checks are not claimed as verified. For guidance-assisted work, principle notes connect to concrete changes."
+    ]
+  }
+]

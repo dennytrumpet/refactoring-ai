@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meridian invoices</title>
+<style>
+body { margin: 0; padding: 20px; font: 15px/1.5 system-ui, sans-serif; color: #222; background: #fff; }
+.panel { width: 100%; max-width: 480px; padding: 10px; border: 1px solid #777; border-radius: 10px; box-sizing: border-box; }
+h1 { font-size: 22px; margin: 0 0 10px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px; text-align: left; }
+.amount { text-align: right; font-variant-numeric: tabular-nums; }
+.status { font-size: 13px; color: #595959; }
+a { color: #71401d; text-decoration: underline; }
+:focus-visible { outline: 2px solid #71401d; outline-offset: 3px; }
+</style>
+<main class="panel">
+<h1>Invoices</h1>
+<table>
+<caption>Two invoices awaiting payment</caption>
+<thead><tr><th scope="col">Invoice</th><th scope="col">Amount</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead>
+<tbody>
+<tr><th scope="row">1842</th><td class="amount">$120.00</td><td class="status">Overdue</td><td><a href="/invoices/1842">Open invoice 1842</a></td></tr>
+<tr><th scope="row">1843</th><td class="amount">$250.00</td><td class="status">Due Friday</td><td><a href="/invoices/1843">Open invoice 1843</a></td></tr>
+</tbody>
+</table>
+</main>
+</html>

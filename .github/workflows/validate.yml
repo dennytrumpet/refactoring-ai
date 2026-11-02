@@ -9,5 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate skill frontmatter
+      - name: Validate skills and local links
         run: python3 scripts/validate-skills.py
+      - name: Measure documented text contrast
+        run: python3 scripts/check-contrast.py
+      - name: Test verification tools
+        run: python3 -m unittest discover -s tests -v
