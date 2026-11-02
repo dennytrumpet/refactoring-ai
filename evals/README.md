@@ -12,6 +12,8 @@ python3 scripts/prepare-evaluation.py /tmp/meridian-ui-work --seed 17
 
 The script creates two assignment folders with identical requests and fixtures. One folder also contains the skill suite and instructions for reading it. Labels are shuffled using the supplied seed. `conditions.json` records the assignment mapping and hashes of the source artifacts. Keep that file from participants and reviewers until their judgments are complete.
 
+Keep generated outputs, source hashes, and review logs outside the repository or under the ignored `evals/runs/` directory. Commit reusable input fixtures and a concise results summary. Promote an output to a tracked fixture only when a maintained regression check uses it.
+
 ## Run independent sessions
 
 Give each participant only its own folder and this request, with the appropriate path substituted.
